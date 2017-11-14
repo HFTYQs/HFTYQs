@@ -62,6 +62,7 @@ public class qualitycontroller {
 		t.setPm(pm);
 		t.setPmm(pmm);
 		t.setStation(station);
+		System.out.println("222222222222");
 		qs.insert(t);
 		return "page";
 		
