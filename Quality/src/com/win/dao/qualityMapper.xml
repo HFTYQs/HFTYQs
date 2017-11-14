@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.win.dao.qualityMapper">
+<resultMap type="quality" id="ty">
+	<id property="id" column="id"/>
+	<result property="did" column="did"/>
+	<result property="time" column="time"/>
+	<result property="pm" column="pm"/>
+	<result property="pmm" column="pmm"/>
+	<result property="station" column="station"/>
+	<result property="modify" column="modify"/>
+	
+	<association property="district" javaType="district">
+	 <id property="id" column="id"/>
+	 <result property="name" column="name"/>
+	</association>
+</resultMap>
+ <select id="page" resultMap="ty">
+ select * from quality join district ON quality.did=district.id ORDER BY quality.id LIMIT #{b},#{i}
+ </select>
+ <select id="count" resultType="int">
+   select count(*) from quality
+ </select>
+ <delete id="delete" parameterType="int">
+   delete from quality where id=#{id}
+ </delete>
+ <insert id="insert" parameterType="quality">
+    insert quality (did,`modify`,pm,pmm,station) VALUES(#{did},#{modify},#{pm},#{pmm},#{station}) 
+ </insert>
+</mapper>
